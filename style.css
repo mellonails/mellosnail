@@ -7,34 +7,39 @@
   --shadow: 0 0 15px var(--accent);
 }
 
-/* Global */
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+}
+
+body {
   background-color: var(--bg);
   color: var(--text-color);
+  font-family: Arial, sans-serif;
   transition: background 0.3s, color 0.3s;
 }
 
-/* Header */
 header {
   text-align: center;
   padding: 30px 15px;
   background: var(--panel);
   box-shadow: var(--shadow);
 }
+
 header h1 {
   font-size: 3rem;
   color: var(--heading-color);
   text-shadow: 0 0 8px var(--accent);
   animation: glow 2.5s infinite alternate;
 }
+
 header .sub {
   font-size: 1.2rem;
   opacity: 0.7;
+  margin-top: 5px;
 }
 
-/* Shop grid */
 .shop {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -42,18 +47,20 @@ header .sub {
   padding: 25px;
 }
 
-/* Cards */
 .card {
   background: var(--panel);
   padding: 15px;
   border-radius: 16px;
   box-shadow: var(--shadow);
+  transition: all 0.3s ease;
   text-align: center;
 }
+
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 0 25px var(--accent);
 }
+
 .card h3 {
   margin: 12px 0 6px;
   font-size: 1.2rem;
@@ -61,6 +68,7 @@ header .sub {
   text-shadow: 0 0 6px var(--accent);
   animation: glow 2.5s infinite alternate;
 }
+
 .card input.qty {
   display: block;
   margin: 0 auto 10px;
@@ -71,76 +79,23 @@ header .sub {
   text-align: center;
 }
 
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  background: var(--panel);
-  padding: 20px;
-  border-radius: 0 10px 10px 0;
-  box-shadow: var(--shadow);
-}
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-.sidebar ul li {
-  margin: 15px 0;
-}
-.sidebar ul li a {
-  color: var(--text-color);
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Floating palette button */
-#settingsButton {
+.settings {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  cursor: pointer;
+  background: var(--panel);
+  padding: 15px 20px;
+  border-radius: 14px;
   box-shadow: var(--shadow);
-  z-index: 1000;
-  transition: transform 0.2s;
-}
-#settingsButton:hover {
-  transform: scale(1.1);
+  font-size: 0.85rem;
 }
 
-/* Settings panel */
-.settings-panel {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 260px;
-  background: var(--panel);
-  box-shadow: -5px 0 20px var(--accent);
-  padding: 20px;
-  border-radius: 12px;
-  transform: translateY(20px);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  z-index: 999;
-}
-.settings-panel.show {
-  transform: translateY(0);
-  opacity: 1;
-  pointer-events: all;
-}
-.settings-panel h3 {
-  margin-bottom: 15px;
-  color: var(--heading-color);
-  text-shadow: 0 0 5px var(--accent);
+.settings input[type="color"] {
+  width: 35px;
+  height: 25px;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
 }
 
 @keyframes glow {
@@ -149,9 +104,12 @@ header .sub {
   100% { text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent); }
 }
 
-/* Responsive */
 @media (max-width: 600px) {
-  .shop { grid-template-columns: 1fr; padding: 15px; }
-  header h1 { font-size: 2.2rem; }
-  .sidebar { top: auto; bottom: 0; left: 50%; transform: translateX(-50%); border-radius: 10px 10px 0 0; }
+  .shop {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+  header h1 {
+    font-size: 2.2rem;
+  }
 }
