@@ -1,9 +1,20 @@
 const products = [
-  { name: "Bloody Sweetheart", price: 35, stock: 3, image: "https://via.placeholder.com/300" },
-  { name: "Candy Pop", price: 30, stock: 5, image: "https://via.placeholder.com/300" }
+  {
+    name: "Bloody Sweetheart",
+    price: 35,
+    stock: 3,
+    image: "https://via.placeholder.com/300"
+  },
+  {
+    name: "Candy Pop",
+    price: 30,
+    stock: 5,
+    image: "https://via.placeholder.com/300"
+  }
 ];
 
 const shop = document.getElementById("shop");
+
 products.forEach(p => {
   const div = document.createElement("div");
   div.className = "card";
@@ -26,15 +37,7 @@ products.forEach(p => {
   }).render("#paypal-" + p.name);
 });
 
-// --- Settings Panel ---
-const settingsButton = document.getElementById("settingsButton");
-const settingsPanel = document.getElementById("settingsPanel");
-
-settingsButton.addEventListener("click", () => {
-  settingsPanel.classList.toggle("show");
-});
-
-// --- Color pickers ---
+// Color Settings
 const bg = document.getElementById("bg");
 const panel = document.getElementById("panel");
 const accent = document.getElementById("accent");
@@ -44,12 +47,10 @@ if(localStorage.bg) document.documentElement.style.setProperty('--bg', localStor
 if(localStorage.panel) document.documentElement.style.setProperty('--panel', localStorage.panel);
 if(localStorage.accent) document.documentElement.style.setProperty('--accent', localStorage.accent);
 
-// Initialize inputs
 bg.value = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
 panel.value = getComputedStyle(document.documentElement).getPropertyValue('--panel').trim();
 accent.value = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
 
-// Change colors live as you drag
 bg.addEventListener('input', e => {
   document.documentElement.style.setProperty('--bg', e.target.value);
   localStorage.setItem('bg', e.target.value);
