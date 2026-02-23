@@ -1,18 +1,12 @@
-/* =======================
-   Root Theme Variables
-   ======================= */
 :root {
-  --bg: #0a0a0a;            /* main background */
-  --panel: #111111;         /* card / panel background */
-  --accent: #ff2bd6;        /* neon pink glow */
-  --text-color: #ffffff;    /* default text color */
-  --heading-color: #ff72e0; /* neon heading glow */
+  --bg: #0a0a0a;
+  --panel: #111111;
+  --accent: #ff2bd6;
+  --text-color: #ffffff;
+  --heading-color: #ff72e0;
   --shadow: 0 0 15px var(--accent);
 }
 
-/* =======================
-   Global Styles
-   ======================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -22,25 +16,10 @@
 body {
   background-color: var(--bg);
   color: var(--text-color);
-  font-family: 'Arial', sans-serif;
-  line-height: 1.5;
+  font-family: Arial, sans-serif;
   transition: background 0.3s, color 0.3s;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-  border-radius: 12px;
-}
-
-/* =======================
-   Header
-   ======================= */
 header {
   text-align: center;
   padding: 30px 15px;
@@ -52,6 +31,7 @@ header h1 {
   font-size: 3rem;
   color: var(--heading-color);
   text-shadow: 0 0 8px var(--accent);
+  animation: glow 2.5s infinite alternate;
 }
 
 header .sub {
@@ -60,9 +40,6 @@ header .sub {
   margin-top: 5px;
 }
 
-/* =======================
-   Shop Grid
-   ======================= */
 .shop {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -70,17 +47,13 @@ header .sub {
   padding: 25px;
 }
 
-/* =======================
-   Product Card
-   ======================= */
 .card {
   background: var(--panel);
   padding: 15px;
   border-radius: 16px;
   box-shadow: var(--shadow);
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  text-align: center;
 }
 
 .card:hover {
@@ -92,16 +65,8 @@ header .sub {
   margin: 12px 0 6px;
   font-size: 1.2rem;
   color: var(--heading-color);
-  text-align: center;
   text-shadow: 0 0 6px var(--accent);
-}
-
-.card .price {
-  text-align: center;
-  margin-bottom: 8px;
-  font-weight: bold;
-  font-size: 1rem;
-  color: var(--text-color);
+  animation: glow 2.5s infinite alternate;
 }
 
 .card input.qty {
@@ -114,18 +79,6 @@ header .sub {
   text-align: center;
 }
 
-/* =======================
-   PayPal Button Container
-   ======================= */
-.card #paypal-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-/* =======================
-   Settings Panel
-   ======================= */
 .settings {
   position: fixed;
   bottom: 20px;
@@ -135,7 +88,6 @@ header .sub {
   border-radius: 14px;
   box-shadow: var(--shadow);
   font-size: 0.85rem;
-  z-index: 1000;
 }
 
 .settings input[type="color"] {
@@ -144,38 +96,14 @@ header .sub {
   border: none;
   cursor: pointer;
   margin-left: 5px;
-  margin-bottom: 6px;
-  vertical-align: middle;
 }
 
-/* =======================
-   Footer (Optional)
-   ======================= */
-footer {
-  text-align: center;
-  padding: 25px;
-  background: var(--panel);
-  color: var(--text-color);
-  box-shadow: var(--shadow);
-  font-size: 0.9rem;
-}
-
-/* =======================
-   Neon Glow Animations
-   ======================= */
 @keyframes glow {
   0% { text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent); }
   50% { text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent); }
   100% { text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent); }
 }
 
-h1, h3 {
-  animation: glow 2.5s infinite alternate;
-}
-
-/* =======================
-   Responsive
-   ======================= */
 @media (max-width: 600px) {
   .shop {
     grid-template-columns: 1fr;
