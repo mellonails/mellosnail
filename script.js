@@ -1,38 +1,23 @@
 const products = [
-  {
-    name: "Bloody Sweetheart",
-    price: 35,
-    stock: 3,
-    image: "https://via.placeholder.com/300",
-    categories: ["dark", "glam"]
-  },
-  {
-    name: "Candy Pop",
-    price: 30,
-    stock: 5,
-    image: "https://via.placeholder.com/300",
-    categories: ["simple", "nude"]
-  }
+  { name: "Bloody Sweetheart", price: 35, stock: 3, image: "https://via.placeholder.com/300" },
+  { name: "Candy Pop", price: 30, stock: 5, image: "https://via.placeholder.com/300" }
 ];
 
 const shop = document.getElementById("shop");
 
-const formatId = name => name.replace(/\s+/g, '-').toLowerCase();
-
 products.forEach(p => {
   const div = document.createElement("div");
   div.className = "card";
-  div.dataset.categories = p.categories.join(",");
   div.innerHTML = `
     <img src="${p.image}" alt="${p.name}">
     <h3>${p.name}</h3>
     <div class="price">$${p.price}</div>
-    Qty: <input class="qty" type="number" min="1" max="${p.stock}" value="1" id="q-${formatId(p.name)}">
-    <div id="paypal-${formatId(p.name)}"></div>
+    Qty: <input class="qty" type="number" min="1" max="${p.stock}" value="1" id="q-${p.name.replace(/\s+/g, '-').toLowerCase()}">
+    <div id="paypal-${p.name.replace(/\s+/g, '-').toLowerCase()}"></div>
   `;
   shop.appendChild(div);
 
-  const safeId = formatId(p.name);
+  const safeId = p.name.replace(/\s+/g, '-').toLowerCase();
 
   if (window.paypal && typeof window.paypal.Buttons === "function") {
     window.paypal.Buttons({
@@ -46,54 +31,6 @@ products.forEach(p => {
     }).render("#paypal-" + safeId);
   }
 });
-
-// Panel interactions
-const categoriesToggle = document.getElementById("categoriesToggle");
-const categoriesMenu = document.getElementById("categoriesMenu");
-const panelTab = document.getElementById("panelTab");
-
-if (categoriesToggle && categoriesMenu) {
-  categoriesToggle.addEventListener("click", () => {
-    const isOpen = categoriesMenu.classList.toggle("is-open");
-    categoriesToggle.setAttribute("aria-expanded", String(isOpen));
-  });
-}
-
-if (panelTab) {
-  panelTab.addEventListener("click", () => {
-    document.body.classList.toggle("panel-open");
-    panelTab.setAttribute(
-      "aria-expanded",
-      String(document.body.classList.contains("panel-open"))
-    );
-  });
-}
-
-const filterButtons = document.querySelectorAll(".submenu-link");
-if (filterButtons.length) {
-  filterButtons.forEach(button => {
-    button.addEventListener("click", () => {
-      const filter = button.dataset.filter;
-
-      filterButtons.forEach(btn => btn.classList.remove("is-active"));
-      button.classList.add("is-active");
-
-      document.querySelectorAll(".card").forEach(card => {
-        if (filter === "all") {
-          card.classList.remove("hidden");
-          return;
-        }
-
-        const categories = card.dataset.categories ? card.dataset.categories.split(",") : [];
-        if (categories.includes(filter)) {
-          card.classList.remove("hidden");
-        } else {
-          card.classList.add("hidden");
-        }
-      });
-    });
-  });
-}
 
 // Color Settings
 const bg = document.getElementById("bg");
@@ -121,18 +58,16 @@ accent.addEventListener('input', e => {
   document.documentElement.style.setProperty('--accent', e.target.value);
   localStorage.setItem('accent', e.target.value);
 });
-const panelItems = document.querySelectorAll('#left-panel .menu-item');
 
+// Left Panel Interactions
+const panelItems = document.querySelectorAll('#left-panel .menu-item');
 panelItems.forEach(item => {
   item.addEventListener('click', () => {
-    // Toggle submenu if it exists
     const submenu = item.querySelector('.submenu');
     if (submenu) {
       item.classList.toggle('active');
     } else {
-      // For About, Instructions, Contact, Settings — load content dynamically
-      alert(`You clicked: ${item.textContent.trim()}`);
-      // Replace alert with actual content rendering later
+      alert(`You clicked: ${item.textContent.trim()}`); // placeholder for actual content
     }
   });
 });
