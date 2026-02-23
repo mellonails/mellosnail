@@ -113,3 +113,48 @@ header .sub {
     font-size: 2.2rem;
   }
 }
+/* Left Panel */
+#left-panel {
+  position: fixed;
+  top: 0;
+  left: -220px; /* hidden by default */
+  width: 220px;
+  height: 100%;
+  background: var(--panel);
+  box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+  transition: left 0.4s ease;
+  z-index: 1000;
+  padding: 20px 0;
+  font-size: 0.95rem;
+}
+
+#left-panel:hover {
+  left: 0;
+}
+
+.panel-menu {
+  list-style: none;
+}
+
+.panel-menu .menu-item {
+  padding: 12px 20px;
+  cursor: pointer;
+  color: var(--text-color);
+  position: relative;
+  transition: background 0.2s;
+}
+
+.panel-menu .menu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.submenu {
+  display: none;
+  list-style: none;
+  padding-left: 15px;
+  margin-top: 5px;
+}
+
+.menu-item.active .submenu {
+  display: block;
+}
