@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mello — Handmade Press-on Nails</title>
+
+<script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=USD"></script>
+
+<style>
+:root{
+ --bg:#0a0a0a;
+ --panel:#111;
+ --accent:#ff2bd6;
+}
+
+body{
+ margin:0;
+ font-family:Arial;
+ background:var(--bg);
+ color:white;
+}
+
+header{
+ text-align:center;
+ padding:25px;
+}
+
+h1{margin:0;font-size:38px;}
+.sub{opacity:.7}
+
+.shop{
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+ gap:25px;
+ padding:25px;
+}
+
+.card{
+ background:var(--panel);
+ padding:15px;
+ border-radius:16px;
+ box-shadow:0 0 15px var(--accent);
+ transition:.3s;
+}
+
+.card:hover{
+ transform:translateY(-6px);
+ box-shadow:0 0 25px var(--accent);
+}
+
+.card img{
+ width:100%;
+ border-radius:12px;
+}
+
+.qty{
+ width:60px;
+}
+
+.settings{
+ position:fixed;
+ bottom:20px;
+ right:20px;
+ background:var(--panel);
+ padding:15px;
+ border-radius:14px;
+ box-shadow:0 0 10px var(--accent);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Mello</h1>
+<div class="sub">Handmade Press-on Nails</div>
+</header>
+
+<div class="shop" id="shop"></div>
+
+<div class="settings">
+BG <input type="color" id="bg"><br>
+Panel <input type="color" id="panel"><br>
+Glow <input type="color" id="accent">
+</div>
+
+<script>
+
+const products=[
+{
+name:"Bloody Sweetheart",
+price:35,
+stock:3,
+image:"https://via.placeholder.com/300"
+}
+]
+
+const shop=document.getElementById("shop")
+
+products.forEach(p=>{
+const div=document.createElement("div")
+div.className="card"
+
+div.innerHTML=`
+<img src="${p.image}">
+<h3>${p.name}</h3>
+$${p.price}<br>
+Qty <input class="qty" type="number" min="1" max="${p.stock}" value="1" id="q-${p.name}">
+<div id="paypal-${p.name}"></div>
+`
+
+shop.appendChild(div)
+
+paypal.Buttons({
+createOrder:(data,actions)=>{
+let q=document.getElementById("q-"+p.name).value
+return actions.order.create({
+purchase_units:[{amount:{value:(p.price*q).toFixed(2)}}]
+})
+}
+}).render("#paypal-"+p.name)
+
+})
+
+/* COLOR SETTINGS */
+const bg=document.getElementById("bg")
+const panel=document.getElementById("panel")
+const accent=document.getElementById("accent")
+
+bg.oninput=e=>{
+document.documentElement.style.setProperty('--bg',e.target.value)
+localStorage.bg=e.target.value
+}
+panel.oninput=e=>{
+document.documentElement.style.setProperty('--panel',e.target.value)
+localStorage.panel=e.target.value
+}
+accent.oninput=e=>{
+document.documentElement.style.setProperty('--accent',e.target.value)
+localStorage.accent=e.target.value
+}
+
+if(localStorage.bg) document.documentElement.style.setProperty('--bg',localStorage.bg)
+if(localStorage.panel) document.documentElement.style.setProperty('--panel',localStorage.panel)
+if(localStorage.accent) document.documentElement.style.setProperty('--accent',localStorage.accent)
+
+</script>
+
+</body>
+</html>
