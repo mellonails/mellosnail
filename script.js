@@ -26,19 +26,15 @@ products.forEach(p => {
   }).render("#paypal-" + p.name);
 });
 
-// --- Settings Button ---
+// --- Settings Panel ---
 const settingsButton = document.getElementById("settingsButton");
 const settingsPanel = document.getElementById("settingsPanel");
-const closeSettings = document.getElementById("closeSettings");
 
 settingsButton.addEventListener("click", () => {
-  settingsPanel.style.display = settingsPanel.style.display === "block" ? "none" : "block";
-});
-closeSettings.addEventListener("click", () => {
-  settingsPanel.style.display = "none";
+  settingsPanel.classList.toggle("show");
 });
 
-// --- Color customization ---
+// --- Color pickers ---
 const bg = document.getElementById("bg");
 const panel = document.getElementById("panel");
 const accent = document.getElementById("accent");
@@ -53,7 +49,7 @@ bg.value = getComputedStyle(document.documentElement).getPropertyValue('--bg').t
 panel.value = getComputedStyle(document.documentElement).getPropertyValue('--panel').trim();
 accent.value = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
 
-// Change colors live
+// Change colors live as you drag
 bg.addEventListener('input', e => {
   document.documentElement.style.setProperty('--bg', e.target.value);
   localStorage.setItem('bg', e.target.value);
