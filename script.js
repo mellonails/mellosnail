@@ -22,19 +22,24 @@ products.forEach(p => {
     <img src="${p.image}" alt="${p.name}">
     <h3>${p.name}</h3>
     <div class="price">$${p.price}</div>
-    Qty: <input class="qty" type="number" min="1" max="${p.stock}" value="1" id="q-${p.name}">
-    <div id="paypal-${p.name}"></div>
+    Qty: <input class="qty" type="number" min="1" max="${p.stock}" value="1" id="q-${p.name.replace(/\s+/g, '-').toLowerCase()}">
+    <div id="paypal-${p.name.replace(/\s+/g, '-').toLowerCase()}"></div>
   `;
   shop.appendChild(div);
 
-  paypal.Buttons({
-    createOrder: (data, actions) => {
-      let qty = document.getElementById("q-" + p.name).value;
-      return actions.order.create({
-        purchase_units: [{ amount: { value: (p.price * qty).toFixed(2) } }]
-      });
-    }
-  }).render("#paypal-" + p.name);
+  const safeId = p.name.replace(/\s+/g, '-').toLowerCase();
+
+  if (window.paypal && typeof window.paypal.Buttons === "function") {
+    window.paypal.Buttons({
+      createOrder: (data, actions) => {
+        const qtyInput = document.getElementById("q-" + safeId);
+        const qty = qtyInput ? qtyInput.value : 1;
+        return actions.order.create({
+          purchase_units: [{ amount: { value: (p.price * qty).toFixed(2) } }]
+        });
+      }
+    }).render("#paypal-" + safeId);
+  }
 });
 
 // Color Settings
@@ -43,9 +48,9 @@ const panel = document.getElementById("panel");
 const accent = document.getElementById("accent");
 
 // Load saved colors
-if(localStorage.bg) document.documentElement.style.setProperty('--bg', localStorage.bg);
-if(localStorage.panel) document.documentElement.style.setProperty('--panel', localStorage.panel);
-if(localStorage.accent) document.documentElement.style.setProperty('--accent', localStorage.accent);
+if (localStorage.bg) document.documentElement.style.setProperty('--bg', localStorage.bg);
+if (localStorage.panel) document.documentElement.style.setProperty('--panel', localStorage.panel);
+if (localStorage.accent) document.documentElement.style.setProperty('--accent', localStorage.accent);
 
 bg.value = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
 panel.value = getComputedStyle(document.documentElement).getPropertyValue('--panel').trim();
