@@ -9,96 +9,7 @@
 </head>
 <body>
 
-<div class="panel-shell" id="panelShell">
-  <div class="panel-hover-zone" aria-hidden="true"></div>
-  <nav class="left-panel" aria-label="Primary">
-    <button class="panel-tab" id="panelTab" aria-controls="panelMenu" aria-expanded="false">
-      Menu
-    </button>
-    <div class="panel-inner" id="panelMenu">
-      <div class="panel-brand">
-        <span class="panel-title">Mello</span>
-        <span class="panel-tag">Press-on Studio</span>
-      </div>
-
-      <button class="panel-link" id="categoriesToggle" aria-expanded="false" aria-controls="categoriesMenu">
-        Categories
-        <span class="chevron" aria-hidden="true">▾</span>
-      </button>
-      <div class="panel-submenu" id="categoriesMenu">
-        <button class="submenu-link is-active" data-filter="all">All Styles</button>
-        <button class="submenu-link" data-filter="dark">Dark Nails</button>
-        <button class="submenu-link" data-filter="nude">Nude Nails</button>
-        <button class="submenu-link" data-filter="simple">Simple Nails</button>
-        <button class="submenu-link" data-filter="glam">Glam Nails</button>
-      </div>
-
-      <a class="panel-link" href="#about">About</a>
-      <a class="panel-link" href="#instructions">Instructions</a>
-      <a class="panel-link" href="#contact">Contact</a>
-      <button class="panel-link" type="button" aria-disabled="true">Settings</button>
-
-      <div class="panel-footer">
-        <div class="panel-note">Custom-fit press-ons made to order.</div>
-      </div>
-    </div>
-  </nav>
-</div>
-
-<header>
-  <h1>Mello</h1>
-  <div class="sub">Handmade Press-on Nails</div>
-</header>
-
-<main>
-  <div class="shop" id="shop"></div>
-
-  <section class="info" id="about">
-    <h2>About the Press-ons</h2>
-    <p>
-      Each set is shaped, painted, and sealed by hand for a lightweight, salon-quality finish.
-      Nails are built with durable gel and high-gloss top coats, then buffed to create a smooth,
-      wearable edge.
-    </p>
-    <p>
-      Every order includes a prep kit with a mini file, buffer, alcohol prep pads, and adhesive tabs
-      or glue, depending on the requested wear time.
-    </p>
-  </section>
-
-  <section class="info" id="instructions">
-    <h2>Instructions</h2>
-    <ol>
-      <li>Wash hands and dry completely. Push back cuticles and lightly buff the nail surface.</li>
-      <li>Clean each nail with the alcohol prep pad to remove oils.</li>
-      <li>Match each press-on to your nail size before applying glue or tabs.</li>
-      <li>Press firmly for 20-30 seconds starting at the cuticle and rolling forward.</li>
-      <li>Avoid water for at least one hour after application for maximum hold.</li>
-    </ol>
-  </section>
-
-  <section class="info" id="contact">
-    <h2>Contact</h2>
-    <p>Reach out directly for custom sets or sizing help.</p>
-    <div class="contact-links">
-      <a href="https://instagram.com/yourhandle" target="_blank" rel="noreferrer">Instagram: @yourhandle</a>
-      <a href="https://tiktok.com/@yourhandle" target="_blank" rel="noreferrer">TikTok: @yourhandle</a>
-      <a href="mailto:hello@mello-nails.com">Email: hello@mello-nails.com</a>
-    </div>
-  </section>
-</main>
-
-<div class="settings" id="appearanceSettings">
-  <label>Background: <input type="color" id="bg"></label><br>
-  <label>Panel: <input type="color" id="panel"></label><br>
-  <label>Glow: <input type="color" id="accent"></label>
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
-<!-- Add this right after <body> -->
+<!-- Expandable Left Panel -->
 <aside id="left-panel">
   <ul class="panel-menu">
     <li class="menu-item">
@@ -116,3 +27,21 @@
     <li class="menu-item">Settings</li>
   </ul>
 </aside>
+
+<header>
+  <h1>Mello</h1>
+  <div class="sub">Handmade Press-on Nails</div>
+</header>
+
+<div class="shop" id="shop"></div>
+
+<div class="settings">
+  <label>Background: <input type="color" id="bg"></label><br>
+  <label>Panel: <input type="color" id="panel"></label><br>
+  <label>Glow: <input type="color" id="accent"></label>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
