@@ -68,3 +68,18 @@ accent.addEventListener('input', e => {
   document.documentElement.style.setProperty('--accent', e.target.value);
   localStorage.setItem('accent', e.target.value);
 });
+const panelItems = document.querySelectorAll('#left-panel .menu-item');
+
+panelItems.forEach(item => {
+  item.addEventListener('click', () => {
+    // Toggle submenu if it exists
+    const submenu = item.querySelector('.submenu');
+    if (submenu) {
+      item.classList.toggle('active');
+    } else {
+      // For About, Instructions, Contact, Settings — load content dynamically
+      alert(`You clicked: ${item.textContent.trim()}`);
+      // Replace alert with actual content rendering later
+    }
+  });
+});
