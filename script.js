@@ -1,23 +1,38 @@
 const products = [
-  { name: "Bloody Sweetheart", price: 35, stock: 3, image: "https://via.placeholder.com/300" },
-  { name: "Candy Pop", price: 30, stock: 5, image: "https://via.placeholder.com/300" }
+  {
+    name: "Bloody Sweetheart",
+    price: 35,
+    stock: 3,
+    image: "https://via.placeholder.com/300",
+    categories: ["dark", "glam"]
+  },
+  {
+    name: "Candy Pop",
+    price: 30,
+    stock: 5,
+    image: "https://via.placeholder.com/300",
+    categories: ["simple", "nude"]
+  }
 ];
 
 const shop = document.getElementById("shop");
 
+const formatId = name => name.replace(/\s+/g, '-').toLowerCase();
+
 products.forEach(p => {
   const div = document.createElement("div");
   div.className = "card";
+  div.dataset.categories = p.categories.join(",");
   div.innerHTML = `
     <img src="${p.image}" alt="${p.name}">
     <h3>${p.name}</h3>
     <div class="price">$${p.price}</div>
-    Qty: <input class="qty" type="number" min="1" max="${p.stock}" value="1" id="q-${p.name.replace(/\s+/g, '-').toLowerCase()}">
-    <div id="paypal-${p.name.replace(/\s+/g, '-').toLowerCase()}"></div>
+    Qty: <input class="qty" type="number" min="1" max="${p.stock}" value="1" id="q-${formatId(p.name)}">
+    <div id="paypal-${formatId(p.name)}"></div>
   `;
   shop.appendChild(div);
 
-  const safeId = p.name.replace(/\s+/g, '-').toLowerCase();
+  const safeId = formatId(p.name);
 
   if (window.paypal && typeof window.paypal.Buttons === "function") {
     window.paypal.Buttons({
@@ -32,34 +47,7 @@ products.forEach(p => {
   }
 });
 
-// Color Settings
-const bg = document.getElementById("bg");
-const panel = document.getElementById("panel");
-const accent = document.getElementById("accent");
-
-// Load saved colors
-if (localStorage.bg) document.documentElement.style.setProperty('--bg', localStorage.bg);
-if (localStorage.panel) document.documentElement.style.setProperty('--panel', localStorage.panel);
-if (localStorage.accent) document.documentElement.style.setProperty('--accent', localStorage.accent);
-
-bg.value = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
-panel.value = getComputedStyle(document.documentElement).getPropertyValue('--panel').trim();
-accent.value = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
-
-bg.addEventListener('input', e => {
-  document.documentElement.style.setProperty('--bg', e.target.value);
-  localStorage.setItem('bg', e.target.value);
-});
-panel.addEventListener('input', e => {
-  document.documentElement.style.setProperty('--panel', e.target.value);
-  localStorage.setItem('panel', e.target.value);
-});
-accent.addEventListener('input', e => {
-  document.documentElement.style.setProperty('--accent', e.target.value);
-  localStorage.setItem('accent', e.target.value);
-});
-
-// Left Panel Interactions
+// Panel Interactions
 const panelItems = document.querySelectorAll('#left-panel .menu-item');
 panelItems.forEach(item => {
   item.addEventListener('click', () => {
