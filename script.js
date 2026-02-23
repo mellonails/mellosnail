@@ -26,14 +26,16 @@ products.forEach(p => {
   }).render("#paypal-" + p.name);
 });
 
-// --- Settings Panel ---
+// --- Settings Button ---
+const settingsButton = document.getElementById("settingsButton");
 const settingsPanel = document.getElementById("settingsPanel");
-document.getElementById("openSettings").addEventListener("click", e => {
-  e.preventDefault();
-  settingsPanel.style.right = "0";
+const closeSettings = document.getElementById("closeSettings");
+
+settingsButton.addEventListener("click", () => {
+  settingsPanel.style.display = settingsPanel.style.display === "block" ? "none" : "block";
 });
-document.getElementById("closeSettings").addEventListener("click", () => {
-  settingsPanel.style.right = "-300px";
+closeSettings.addEventListener("click", () => {
+  settingsPanel.style.display = "none";
 });
 
 // --- Color customization ---
